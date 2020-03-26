@@ -40,7 +40,10 @@ router.post('/get', (req, res) => {
 
 // 删除轮播图
 router.post('/del', (req, res) => {
-  let { _id } = req.body
+  let { _id, url } = req.body
+  // 删除public中的图片
+  fs.unlinkSync(path.join(__dirname, `..${url}`))
+  // 删除数据库图片
   del(_id)
   .then(() => {
     res.send({code: 0, msg: '删除成功'})
