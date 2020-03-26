@@ -17,6 +17,6 @@ require('./db/connection')
 const bannerRouter = require('./router/bannerRouter')
 app.use('/banner', bannerRouter)
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log('server start')
 })
