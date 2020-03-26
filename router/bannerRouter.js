@@ -7,7 +7,6 @@ const path = require('path')
 const fs = require('fs')
 
 router.post('/add', upload.single('banner'), (req, res) => {
-  let { name } = req.body
   let { mimetype, buffer } = req.file
   let url = ''
   // 获取图片格式
@@ -18,7 +17,7 @@ router.post('/add', upload.single('banner'), (req, res) => {
   let result = fs.writeFileSync(path.join(__dirname, `../public/${imgName}.${ext}`), buffer,)
   if (!result) { url = `/public/${imgName}.${ext}` }
   // 数据库添加
-  bannerAdd({ name, url })
+  bannerAdd({ url })
   .then(() => {
     res.send({code: 0, msg: '上传成功', url})
   })
