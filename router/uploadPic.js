@@ -12,7 +12,7 @@ router.post('/uploadPic', upload.array('pic'), (req, res) => {
     // 图片格式
     let ext = mimetype.split('/')[1]
     // 图片名称
-    let imgName = (new Date()).getTime() + '_pic_' +parseInt(Math.random()*((9999-1111+1)+1111))
+    let imgName = (new Date()).getTime() + '_pic_' + parseInt(Math.random()*10000)
     // 保存图片到public
     let result = fs.writeFileSync(path.join(__dirname, `../public/${imgName}.${ext}`), buffer)
     if (!result) {
