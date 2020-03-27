@@ -16,6 +16,11 @@ require('./db/connection')
 // 轮播图路由
 const bannerRouter = require('./router/bannerRouter')
 app.use('/banner', bannerRouter)
+
+//评论区
+const howRouter = require('./router/howRouter')
+app.use('/how', howRouter)
+
 // 客样照路由
 const picRouter = require('./router/picRouter')
 const uploadPic = require('./router/uploadPic')
