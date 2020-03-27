@@ -16,6 +16,11 @@ require('./db/connection')
 // 轮播图路由
 const bannerRouter = require('./router/bannerRouter')
 app.use('/banner', bannerRouter)
+// 客样照路由
+const picRouter = require('./router/picRouter')
+const uploadPic = require('./router/uploadPic')
+app.use('/pic', picRouter)
+app.use('/pic', uploadPic)
 
 app.listen(3001, () => {
   console.log('server start')
