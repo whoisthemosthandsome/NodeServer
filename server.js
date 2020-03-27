@@ -16,7 +16,11 @@ require('./db/connection')
 // 轮播图路由
 const bannerRouter = require('./router/bannerRouter')
 app.use('/banner', bannerRouter)
+//评论区
+const howRouter = require('./router/howRouter')
+app.use('/how', howRouter)
 
-app.listen(3000, () => {
+
+app.listen(3001, () => {
   console.log('server start')
 })
