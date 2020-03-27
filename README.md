@@ -21,3 +21,6 @@ router.post('/del', (req, res) => {
     res.send({code: -1, msg: '删除失败'})
   })
 })
+## 图片命名
+时间戳+图片所属模块+4位随机数
+eg: 1585232587336_banner_5289.jpeg
