@@ -20,7 +20,6 @@ app.use('/banner', bannerRouter)
 const howRouter = require('./router/howRouter')
 app.use('/how', howRouter)
 
-
 app.listen(3001, () => {
   console.log('server start')
 })
