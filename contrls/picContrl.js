@@ -8,8 +8,14 @@ const picAdd = async (obj) => {
   return result
 }
 
+// 查询客样照
+const picGet = async () => {
+  let result = await picModel.find()
+  return result
+}
 
 
 module.exports = {
-  picAdd
+  picAdd,
+  picGet
 }

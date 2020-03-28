@@ -13,7 +13,7 @@ router.post('/add', upload.single('banner'), (req, res) => {
   // 获取图片格式
   const ext = mimetype.split('/')[1]
   // 图片名称
-  const imgName = (new Date()).getTime() + '_banner' + '_' + parseInt(Math.random()*10000)
+  const imgName = (new Date()).getTime() + '_banner_' + parseInt(Math.random()*10000)
   // 上传图片
   let result = fs.writeFileSync(path.join(__dirname, `../public/${imgName}.${ext}`), buffer,)
   if (!result) { url = `/public/${imgName}.${ext}` }
