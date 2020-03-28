@@ -3,24 +3,7 @@
 2. contrls 数据库操作js文件
 3. public 静态资源文件夹 存放图片
 4. router 路由
-# 删除public中的图片
-删除图片时建议先删除public中的图片再删除数据库里面的数据 减少public文件夹里的无用图片
-eg：
-// 删除轮播图
-router.post('/del', (req, res) => {
-  let { _id, url } = req.body
-  // 删除public中的图片
-  fs.unlinkSync(path.join(__dirname, `..${url}`))
-  // 删除数据库图片
-  del(_id)
-  .then(() => {
-    res.send({code: 0, msg: '删除成功'})
-  })
-  .catch((err) => {
-    console.log(err)
-    res.send({code: -1, msg: '删除失败'})
-  })
-})
+
 ## 图片命名
 时间戳+图片所属模块+4位随机数
 eg: 1585232587336_banner_5289.jpeg
@@ -54,3 +37,27 @@ eg: 1585232587336_banner_5289.jpeg
         "/public/1585380222304_how_2656.jpeg"
     ]
 }
+
+### 删除public中的图片
+1. 删除图片时建议先删除public中的图片再删除数据库里面的数据 减少public文件夹里的无用图片
+2. 删除public中图片代码
+  imgs.map((item) => {
+    fs.unlinkSync(path.join(__dirname, `..${item}`))
+  })
+3. 举例  前端传_id 和 图片路径数组
+// 删除客样照
+router.post('/del', (req, res) => {
+  let { _id, imgs } = req.body
+  // 删除public中的图片
+  imgs.map((item) => {
+    fs.unlinkSync(path.join(__dirname, `..${item}`))
+  })
+  // 删除数据库中客样照
+  picDel(_id)
+  .then(() => {
+    res.send({code: 0, msg: '删除成功'})
+  })
+  .catch((stack) => {
+    res.send({code: -1, msg: '删除失败', stack})
+  })
+})
