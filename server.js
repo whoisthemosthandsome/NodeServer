@@ -27,6 +27,10 @@ const uploadPic = require('./router/uploadPic')
 app.use('/pic', picRouter)
 app.use('/pic', uploadPic)
 
+// 上传图片
+const upload = require('./router/upload')
+app.use(upload)
+
 app.listen(3001, () => {
   console.log('server start')
 })
