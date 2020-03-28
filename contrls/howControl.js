@@ -37,6 +37,10 @@ let ByPage = async (page,pageSize)=>{
     let result =await howModel.find().skip((Number(page)-1)*pageSize).limit(Number(pageSize))
     return {result,allCount}
 }
+//得到图片
+// let showPic = async (_id) =>{
+//   let result = await 
+// }
 module.exports = {
   howAdd,howList,howDel,picAdd,allList,ByPage
 }
