@@ -14,6 +14,7 @@ let multipleFields = upload.fields([
 
 router.post('/upload', (req, res) => {
   multipleFields(req,res,(err) => {
+    if(!!err){return res.send({ code: 0, msg: '上传失败', stack: err})}
     let imgs = []
     for (const key in req.files) {
       req.files[key].map((item)=>{
@@ -30,11 +31,7 @@ router.post('/upload', (req, res) => {
       })
     }
     res.send({ code: 0, msg: '上传成功', imgs })
- 
   });
-
-
-
 })
 
 module.exports = router
