@@ -9,4 +9,5 @@ const howSchema = new mongoose.Schema({
   staffName:{type: String,required:true },//评论摄影师对象
 })
 const howModel = mongoose.model('hows', howSchema)
+//抛出
 module.exports = howModel

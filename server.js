@@ -43,6 +43,13 @@ app.use('/user',userRouter)
 const loginRouter = require('./router/loginRouter')
 app.use('/login',loginRouter)
 
+//预约路由
+const bookRouter = require('./router/bookRouter')
+app.use('/book',bookRouter)
+//订单路由
+const orderRouter = require('./router/orderRouter')
+app.use('/order',orderRouter)
+
 // 上传图片
 const upload = require('./router/upload')
 app.use(upload)
