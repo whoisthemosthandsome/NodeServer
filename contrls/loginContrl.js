@@ -1,6 +1,6 @@
 
 // -----------------管理员库操作--------------------------
-const userModel = require('../db/model/loginModel')
+const loginModel = require('../db/model/loginModel')
   //添加管理员
   const loginAdd = async (obj) =>{
     let result = await loginModel.insertMany(obj)
