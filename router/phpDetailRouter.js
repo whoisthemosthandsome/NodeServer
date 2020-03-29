@@ -47,13 +47,5 @@ router.post('/phpupdate',(req,res)=>{
         res.send({code:-1,msg:'更新失败',err})
     })
 })
-// 根据_id查找摄影师数据
-router.post('/phpfindone',(req,res)=>{
-    let {_id}=req.body
-    phpDetailsModel.findOne({_id}).then((data)=>{
-        res.send({code:0,msg:"查询成功",data})
-    }).catch((err)=>{
-        res.send({code:0,msg:"查询失败"})
-    })
-})
+
 module.exports=router
