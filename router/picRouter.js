@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 const path = require('path')
-const { picAdd, picGet, picDel, picGetByPage, picGetById, picUpdate } = require('../contrls/picContrl')
+const { picAdd, picGet, picDel, picGetByPage, picGetById, picUpdate, picGetByPhpId, picGetByKw } = require('../contrls/picContrl')
 
 // 添加客样照
 router.post('/add', (req, res) => {
@@ -40,12 +40,36 @@ router.post('/getByPage', (req, res) => {
   })
 })
 
-//  通过id查询客样照
+//  通过客样照id查询
 router.post('/getById', (req, res) => {
   let {_id} = req.body
   picGetById(_id)
   .then((list) => {
     res.send({code: 0, msg: '查询成功', list})
+  })
+  .catch((stack) => {
+    res.send({code: -1, msg: '查询失败', stack})
+  })
+})
+
+//  通过摄影师id查询
+router.post('/getByPhpId', (req, res) => {
+  let {photer} = req.body
+  picGetByPhpId(photer)
+  .then(({list, count}) => {
+    res.send({code: 0, msg: '查询成功', list, count})
+  })
+  .catch((stack) => {
+    res.send({code: -1, msg: '查询失败', stack})
+  })
+})
+
+//  通过关键词查询客样照
+router.post('/getByKw', (req, res) => {
+  let {kw} = req.body
+  picGetByKw(kw)
+  .then(({list, count}) => {
+    res.send({code: 0, msg: '查询成功', list, count})
   })
   .catch((stack) => {
     res.send({code: -1, msg: '查询失败', stack})
