@@ -7,6 +7,7 @@ const upload = multer({})
 
 // 多字段名上传图片
 // 在此处加上要上传图片的字段
+//fields可以接受多个参数，多个key值的东西
 let multipleFields = upload.fields([
   {name:'pic'},
   {name:'how'}
@@ -14,7 +15,7 @@ let multipleFields = upload.fields([
 
 router.post('/upload', (req, res) => {
   multipleFields(req,res,(err) => {
-    if(!!err){return res.send({ code: 0, msg: '上传失败', stack: err})}
+    if(err){return res.send({ code: 0, msg: '上传失败', stack: err})}
     let imgs = []
     for (const key in req.files) {
       req.files[key].map((item)=>{
