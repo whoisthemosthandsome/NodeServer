@@ -42,7 +42,11 @@ router.post('/get', (req, res) => {
 router.post('/del', (req, res) => {
   let { _id, url } = req.body
   // 删除public中的图片
-  fs.unlinkSync(path.join(__dirname, `..${url}`))
+  fs.readFile(path.join(__dirname, `..${url}`), (err) => {
+    if(!err){
+      fs.unlinkSync(path.join(__dirname, `..${url}`))
+    }
+  })
   // 删除数据库图片
   del(_id)
   .then(() => {
