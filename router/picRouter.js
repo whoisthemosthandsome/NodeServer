@@ -7,7 +7,8 @@ const { picAdd, picGet, picDel, picGetByPage } = require('../contrls/picContrl')
 // 添加客样照
 router.post('/add', (req, res) => {
   let { title, desc, photer, imgs } = req.body
-  picAdd({ title, desc, photer, imgs, look: 0, like: 0 })
+  let createTime = (new Date()).getTime()
+  picAdd({ title, desc, photer, imgs, look: 0, like: 0, createTime })
    .then(() => {
      res.send({code: 0, msg: '添加成功'})
    })
@@ -44,7 +45,11 @@ router.post('/del', (req, res) => {
   let { _id, imgs } = req.body
   // 删除public中的图片
   imgs.map((item) => {
-    fs.unlinkSync(path.join(__dirname, `..${item}`))
+   fs.readFile(path.join(__dirname, `..${item}`), (err) => {
+    if(!err){
+      fs.unlinkSync(path.join(__dirname, `..${item}`))
+    }
+   })
   })
   // 删除数据库中客样照
   picDel(_id)

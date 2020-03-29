@@ -16,7 +16,7 @@ const picGet = async () => {
 
 // 分页查询客样照
 const picGetByPage = async (page, pageSize) => {
-  let list = await picModel.find().sort({_id: -1}).skip((page - 1) * pageSize).limit(pageSize)
+  let list = await picModel.find().sort({_id: -1}).skip((page - 1) * pageSize).limit(pageSize).populate('photer', 'phpName -_id')
   let count = await picModel.find()
   count = count.length
   return { list, count }
