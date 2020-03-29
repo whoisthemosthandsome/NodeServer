@@ -15,8 +15,12 @@ app.use(bodyParser.json())
 require('./db/connection')
 // 轮播图路由
 const bannerRouter = require('./router/bannerRouter')
-app.use('/banner', bannerRouter)
+const phpRouter=require('./router/phpRouter')
+const phpDetailsRouter=require('./router/phpDetailRouter')
 
-app.listen(3000, () => {
+app.use('/banner', bannerRouter)
+app.use('/php',phpRouter)
+app.use('/phpdetails',phpDetailsRouter)
+app.listen(3001, () => {
   console.log('server start')
 })
