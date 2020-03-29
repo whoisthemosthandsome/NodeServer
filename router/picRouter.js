@@ -2,13 +2,13 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 const path = require('path')
-const { picAdd, picGet, picDel, picGetByPage } = require('../contrls/picContrl')
+const { picAdd, picGet, picDel, picGetByPage, picGetById, picUpdate } = require('../contrls/picContrl')
 
 // 添加客样照
 router.post('/add', (req, res) => {
-  let { title, desc, photer, imgs } = req.body
+  let { title, desc, photer, imgs, phpType } = req.body
   let createTime = (new Date()).getTime()
-  picAdd({ title, desc, photer, imgs, look: 0, like: 0, createTime })
+  picAdd({ title, desc, photer, imgs, look: 0, like: 0, createTime, phpType })
    .then(() => {
      res.send({code: 0, msg: '添加成功'})
    })
@@ -38,6 +38,41 @@ router.post('/getByPage', (req, res) => {
   .catch((stack) => {
     res.send({code: -1, msg: '查询失败', stack})
   })
+})
+
+//  通过id查询客样照
+router.post('/getById', (req, res) => {
+  let {_id} = req.body
+  picGetById(_id)
+  .then((list) => {
+    res.send({code: 0, msg: '查询成功', list})
+  })
+  .catch((stack) => {
+    res.send({code: -1, msg: '查询失败', stack})
+  })
+})
+
+// 修改客样照
+router.post('/update', (req, res) => {
+  let { _id, title, desc, photer, phpType, imgs, look, like, imgsChange, imgsBeforeUpdate } = req.body
+  if (imgsChange) { // 删除public中修改前的图片
+     imgsBeforeUpdate.map((item) => {
+      fs.readFile(path.join(__dirname, `..${item}`), (err) => {
+        if(!err){
+          fs.unlinkSync(path.join(__dirname, `..${item}`))
+        }
+      })
+    })
+  }
+ 
+  let createTime = (new Date()).getTime() // 当前时间
+  picUpdate(_id, { title, desc, photer, phpType, imgs, look, like, createTime })
+   .then(() => {
+     res.send({code: 0, msg: '修改成功'})
+   })
+   .catch((stack) => {
+     res.send({code: -1, msg: '修改失败', stack})
+   })
 })
 
 // 删除客样照
