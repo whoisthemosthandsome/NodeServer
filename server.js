@@ -15,7 +15,9 @@ app.use(bodyParser.json())
 require('./db/connection')
 // 轮播图路由
 const bannerRouter = require('./router/bannerRouter')
+// 摄影师路由
 const phpRouter=require('./router/phpRouter')
+// 摄影师详情页路由
 const phpDetailsRouter=require('./router/phpDetailRouter')
 
 app.use('/banner', bannerRouter)
