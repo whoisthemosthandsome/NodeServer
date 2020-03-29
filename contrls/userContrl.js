@@ -17,8 +17,8 @@ const userModel = require('../db/model/userModel')
     return result
   }
   //删除用户
-  const userDel = async (id)=>{
-    let result = await userModel.deleteOne({id})
+  const userDel = async (_id)=>{
+    let result = await userModel.deleteOne({_id})
     return result
   }
   // 分页查询用户

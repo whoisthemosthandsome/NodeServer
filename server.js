@@ -39,6 +39,10 @@ app.use('/pic', uploadPic)
 const userRouter = require('./router/userRouter')
 app.use('/user',userRouter)
 
+//管理员路由
+const loginRouter = require('./router/loginRouter')
+app.use('/login',loginRouter)
+
 // 上传图片
 const upload = require('./router/upload')
 app.use(upload)
