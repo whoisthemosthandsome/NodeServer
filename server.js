@@ -26,8 +26,8 @@ app.use('/php',phpRouter)
 app.use('/phpdetails',phpDetailsRouter)
 
 //评论区
-// const howRouter = require('./router/howRouter')
-// app.use('/how', howRouter)
+ const howRouter = require('./router/howRouter')
+ app.use('/how', howRouter)
 
 // 客样照路由
 const picRouter = require('./router/picRouter')
@@ -38,6 +38,10 @@ app.use('/pic', uploadPic)
 //用户路由
 const userRouter = require('./router/userRouter')
 app.use('/user',userRouter)
+
+//管理员路由
+const loginRouter = require('./router/loginRouter')
+app.use('/login',loginRouter)
 
 // 上传图片
 const upload = require('./router/upload')

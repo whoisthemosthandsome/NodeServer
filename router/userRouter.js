@@ -23,7 +23,7 @@ router.post('/get', (req, res) => {
     })
     })
     // 删除用户信息
-    router.post('/del', (req, res) => {
+router.post('/del', (req, res) => {
     let {_id} = req.body
         userDel(_id)
         .then(() => {
@@ -38,10 +38,20 @@ router.post('/page', (req, res) => {
     let { page, pageSize } = req.body
     userPage(Number(page), Number(pageSize))
     .then(({list, count}) => {
-      res.send({code: 0, msg: '查询成功', list, count})
+        res.send({code: 0, msg: '查询成功', list, count})
     })
     .catch((err) => {
-      res.send({code: -1, msg: '查询失败', err})
+        res.send({code: -1, msg: '查询失败', err})
     })
-  })
+    })
+    //修改用户信息
+    router.post('/updata',(req,res) => {
+        userUpdata(_id,{obj})
+        .then(() => {
+        res.send({code: 0, msg: '修改成功'})
+        })
+        .catch((err) => {
+            res.send({code: -1, msg: '修改失败', err})
+        })
+    })
 module.exports = router
