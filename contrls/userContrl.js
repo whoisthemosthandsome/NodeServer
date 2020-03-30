@@ -7,13 +7,19 @@ const userModel = require('../db/model/userModel')
     return result
   }
   //修改用户信息
-  const userUpdata = async (id,{obj}) =>{
-    let result = await userModel.updateOne({_id},{obj})
+  const userUpdata = async (_id,obj) =>{
+    let result = await userModel.update({_id},obj)
+    // console.log(result)
     return result
   }
   //查看用户
   const userFind = async ()=>{
     let result = await userModel.find()
+    return result
+  }
+  //查询一个用户
+  const userFindOne = async (_id)=>{
+    let result = await userModel.find({_id})
     return result
   }
   //删除用户
@@ -28,4 +34,4 @@ const userPage = async (page, pageSize) => {
   count = count.length
   return { list, count }
 }
-module.exports = {userAdd,userUpdata,userFind,userDel,userPage}
+module.exports = {userAdd,userUpdata,userFind,userDel,userPage,userFindOne}

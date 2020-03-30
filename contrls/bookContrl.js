@@ -5,22 +5,25 @@ const bookAdd = async (obj)=>{
     let result = await bookModel.insertMany(obj)
     return result
 }
-//查看预约
+//根据用户查看预约
 const bookFindUser = async (userName)=>{
     let result = await bookModel.find({userName})
     // console.log(result)
     return result
 }
+//根据摄影师查看
 const bookFindPho = async (phoName)=>{
     let result = await bookModel.find({phoName})
     // console.log(result)
     return result
 }
+//查看
 const bookFind = async ()=>{
     let result = await bookModel.find()
     // console.log(result)
     return result
 }
+//删除
 const bookDel = async (_id)=>{
     let result = await bookModel.deleteOne({_id})
     return result

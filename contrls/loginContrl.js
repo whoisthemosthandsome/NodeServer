@@ -28,7 +28,11 @@ const loginModel = require('../db/model/loginModel')
   //修改管理员信息
   const loginUpdata = async (_id,obj) =>{
     let result = await loginModel.updateOne({_id},obj)
+<<<<<<< HEAD
     console.log(result)
+=======
+    // console.log(result)
+>>>>>>> 1e7643eede581b7723e1637a5bb2c0425f9800a2
     return result
   }
 module.exports = {loginAdd,loginUpdata,loginFind,loginDel,loginFindOne,loginup}

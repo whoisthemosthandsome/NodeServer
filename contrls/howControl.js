@@ -30,17 +30,29 @@ let allList = async ()=>{
 }
 //分页
 let ByPage = async (page,pageSize)=>{
+  console.log('执行到这里了')
     let  allFood = await howModel.find() 
     // 总数据条数
     let  allCount = allFood.length
     // 每一页的数据
     let result =await howModel.find().skip((Number(page)-1)*pageSize).limit(Number(pageSize))
+   // .populate('staffName', 'phpName -_id')
+    console.log('后端38行',result)
     return {result,allCount}
 }
-//得到图片
-// let showPic = async (_id) =>{
-//   let result = await 
-// }
+//通过用户名得到平均分
+let getScore = async (staffName) =>{
+  let list = await howModel.find({staffName})
+  console.log(list)
+  let allScore=0
+  for(var i in list){
+    allScore+=Number(list[i].star)
+  }
+  console.log('总分',allScore)
+  let result=(allScore/list.length)
+  console.log(result)
+  return result
+}
 module.exports = {
-  howAdd,howList,howDel,picAdd,allList,ByPage
+  howAdd,howList,howDel,picAdd,allList,ByPage,getScore
 }

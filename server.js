@@ -22,9 +22,9 @@ app.use('/banner', bannerRouter)
 const phpRouter=require('./router/phpRouter')
 // 摄影师详情页路由
 const phpDetailsRouter=require('./router/phpDetailRouter')
+app.use('/banner', bannerRouter)
 app.use('/php',phpRouter)
 app.use('/phpdetails',phpDetailsRouter)
-
 //评论区
  const howRouter = require('./router/howRouter')
  app.use('/how', howRouter)
@@ -44,8 +44,8 @@ const loginRouter = require('./router/loginRouter')
 app.use('/login',loginRouter)
 
 //预约路由
-// const bookRouter = require('./router/bookRouter')
-// app.use('/book',bookRouter)
+const bookRouter = require('./router/bookRouter')
+app.use('/book',bookRouter)
 //订单路由
 const orderRouter = require('./router/orderRouter')
 app.use('/order',orderRouter)

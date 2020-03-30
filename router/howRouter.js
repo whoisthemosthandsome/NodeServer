@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { howAdd,howList,howDel,allList,ByPage} = require ('../contrls/howControl.js')
+const { howAdd,howList,howDel,allList,ByPage,getScore} = require ('../contrls/howControl.js')
 
 //用户添加自己的评论
 router.post('/add',(req,res)=>{
@@ -55,9 +55,18 @@ router.post('/pages',(req,res)=>{
   let pageSize = req.body.pageSize ||2 //每页几条数据
   ByPage(page,pageSize)
   .then((data)=>{
+    console.log('后端58行',data)
      let {result,allCount}=data 
     res.send({err:0,msg:'查询成功',list:result,allCount})
   })
   .catch((err)=>{res.send({err:-1,msg:'查询失败请重试'})})
+})
+//通过工作人员姓名查找平均分
+router.post('/score',(req,res)=>{
+  let staffName = req.body.phpName
+  getScore(staffName)
+  .then((data)=>{
+    res.send({err:0,msg:'查询平均分成功',score:data})
+  })
 })
 module.exports = router
