@@ -25,9 +25,9 @@ router.post('/upload', (req, res) => {
         // 图片名称
         let imgName = (new Date()).getTime() + `_${key}_` + parseInt(Math.random()*10000)
           // 保存图片到public
-        let result = fs.writeFileSync(path.join(__dirname, `../public/${imgName}.${ext}`), buffer)
+        let result = fs.writeFileSync(path.join(__dirname, `../public/${key}/${imgName}.${ext}`), buffer)
         if (!result) {
-          imgs.push(`/public/${imgName}.${ext}`)
+          imgs.push(`/public/${key}/${imgName}.${ext}`)
         }
       })
     }

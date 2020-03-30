@@ -6,8 +6,9 @@ const { howAdd,howList,howDel,allList,ByPage} = require ('../contrls/howControl.
 router.post('/add',(req,res)=>{
   console.log('body',req.body)
   let {userName,content,url,star,staffName}=req.body
+  let createTime=(new Date()).getTime()
 //  console.log('后端控制台8行',url)
-  howAdd({userName,content,url,star,staffName})
+  howAdd({userName,content,url,star,staffName,createTime})
   .then(()=>{
     res.send({code:0,msg:'添加评论成功',url})
   })
