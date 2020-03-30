@@ -2,6 +2,7 @@
 // 评论区模型
 const mongoose =require('mongoose')
 const howSchema = new mongoose.Schema({
+  createTime:{type:String,required:true},//发表评论的时间
   userName:{ type: String,required:true },//评论对象
   content: { type: String,required:true },//评论内容
   url: { type: Array,required:false  },//图片路径

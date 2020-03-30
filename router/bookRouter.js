@@ -13,7 +13,7 @@ router.post('/add',(req,res)=>{
 })
 router.post('/get',(req,res)=>{
     let {userName} = req.body
-    bookFind({userName})
+    bookFind(userName)
     .then((res)=>{
         let {list} = res
         res.send({code:0,msg:'查询成功',list})
