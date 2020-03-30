@@ -20,11 +20,9 @@ const phpRouter=require('./router/phpRouter')
 // 摄影师详情页路由
 const phpDetailsRouter=require('./router/phpDetailRouter')
 
-<<<<<<< HEAD
 app.use('/banner', bannerRouter)
 app.use('/php',phpRouter)
 app.use('/phpdetails',phpDetailsRouter)
-=======
 //评论区
 // const howRouter = require('./router/howRouter')
 // app.use('/how', howRouter)
@@ -39,7 +37,6 @@ app.use('/pic', uploadPic)
 const upload = require('./router/upload')
 app.use(upload)
 
->>>>>>> 2606d768f20aecf5b8248418186ca0d59eabab6d
 app.listen(3001, () => {
   console.log('server start')
 })

@@ -3,13 +3,13 @@ const router =express.Router()
 const phpModel=require('../db/model/phpModel')
 const path=require('path')
 const fs=require('fs')
+const {findPhpByPage} = require('../contrls/phpContrl')
 var multer  = require('multer')
 var upload = multer({})
 // 添加摄影师
 router.post('/insertphp',(req,res)=>{
-   let {imgPath1,phpName1,phpPosition1,phpSelect1,phpID1}=req.body
-   console.log(imgPath1,phpName1,phpPosition1,phpSelect1,phpID1)
-   phpModel.insertMany({imgPath:imgPath1,phpName:phpName1,phpPositionL:phpPosition1,phpSelect:phpSelect1,phpID:phpID1}).then((data)=>{
+   let {imgPath,phpName,phpPosition,phpSelect,phpID}=req.body
+   phpModel.insertMany({imgPath,phpName,phpPosition,phpSelect,phpID}).then((data)=>{
        res.send({code:0,msg:'插入成功'})
    }).catch((data)=>{
     res.send({code:-1,msg:'插入失败'})
@@ -18,7 +18,6 @@ router.post('/insertphp',(req,res)=>{
 // 单文件上传
 router.post('/file',upload.single('xixi'),(req,res)=>{
     let {buffer}=req.file
-    console.log(buffer)
     let imgName=(new Date()).getTime()+'_photographer_'+parseInt(Math.random())*1234
     fs.writeFile(path.join(__dirname,`../public/phpimg/${imgName}.jpg`),buffer,(err)=>{
         if(err) {
@@ -72,5 +71,16 @@ router.post('/phpfindonebyid',(req,res)=>{
     }).catch((err)=>{
         res.send({code:0,msg:"查询失败"})
     })
+})
+// 分页查询
+router.post('/findphpbypage',(req,res)=>{
+    let page = req.body.page
+    let pageSize = req.body.pageSize
+    findPhpByPage(page,pageSize)
+    .then((data)=>{
+        let {result} =data
+      res.send({err:0,msg:'查询成功',result})
+    })
+    .catch((err)=>{res.send({err:-1,msg:'查询失败请重试'})})
 })
 module.exports=router
