@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const {loginAdd,loginrDel,loginFind,loginUpdata,loginFindOne} = require('../contrls/loginContrl')
+const {loginAdd,loginDel,loginFind,loginUpdata,loginFindOne,loginup} = require('../contrls/loginContrl')
 
 //添加管理员信息
 router.post('/add',(req,res) =>{
-    let {userName,passWord} = req.body
-    loginAdd({userName,passWord})
+    let {userName,passWord,leavel} = req.body
+    loginAdd({userName,passWord,leavel})
     .then(()=>{
         res.send({code: 0, msg: '添加成功'})
     }).catch((err)=>{
@@ -34,6 +34,16 @@ router.post('/getone', (req, res) => {
         res.send({code: -1, msg: '查询失败', err})
     })
 })
+router.post('/getup', (req, res) => {
+    let {_id} = req.body
+    loginup(_id)
+    .then((result) => {
+        res.send({code: 0, msg: '查询成功',list:result})
+    })
+    .catch((err) => {
+        res.send({code: -1, msg: '查询失败', err})
+    })
+})
     // 删除管理员信息
 router.post('/del', (req, res) => {
     let {_id} = req.body
@@ -47,12 +57,16 @@ router.post('/del', (req, res) => {
 })
     //修改用户信息
 router.post('/updata',(req,res) => {
-    loginUpdata(_id,{obj})
-    .then(() => {
+    let {_id}= req.body
+    let{userName,passWord,leavel} = req.body
+    loginUpdata(_id,{userName,passWord,leavel})
+    .then((result) => {
+        console.log(result)
         res.send({code: 0, msg: '修改成功'})
     })
     .catch((err) => {
         res.send({code: -1, msg: '修改失败', err})
+        console.log(err)
     })
 })
 module.exports = router
