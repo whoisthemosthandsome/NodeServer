@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 const path = require('path')
-const XLSX = require('xlsx')
 const { picAdd, picGet, picDel, picGetByPage, picGetById, picUpdate, picGetByPhpId, picGetByKw } = require('../contrls/picContrl')
 
 // 添加客样照
