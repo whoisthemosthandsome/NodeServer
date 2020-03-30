@@ -22,16 +22,9 @@ app.use('/banner', bannerRouter)
 const phpRouter=require('./router/phpRouter')
 // 摄影师详情页路由
 const phpDetailsRouter=require('./router/phpDetailRouter')
-<<<<<<< HEAD
-app.use('/php',phpRouter)
-app.use('/phpdetails',phpDetailsRouter)
-
-=======
-
 app.use('/banner', bannerRouter)
 app.use('/php',phpRouter)
 app.use('/phpdetails',phpDetailsRouter)
->>>>>>> self
 //评论区
  const howRouter = require('./router/howRouter')
  app.use('/how', howRouter)
