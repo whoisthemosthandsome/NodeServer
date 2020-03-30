@@ -15,8 +15,8 @@ router.post('/add', upload.single('banner'), (req, res) => {
   // 图片名称
   const imgName = (new Date()).getTime() + '_banner_' + parseInt(Math.random()*10000)
   // 上传图片
-  let result = fs.writeFileSync(path.join(__dirname, `../public/${imgName}.${ext}`), buffer,)
-  if (!result) { url = `/public/${imgName}.${ext}` }
+  let result = fs.writeFileSync(path.join(__dirname, `../public/banner/${imgName}.${ext}`), buffer,)
+  if (!result) { url = `/public/banner/${imgName}.${ext}` }
   // 数据库添加
   bannerAdd({ url })
   .then(() => {
