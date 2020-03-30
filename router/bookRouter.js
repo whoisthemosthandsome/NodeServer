@@ -22,13 +22,6 @@ router.post('/get',(req,res)=>{
 })
 router.post('/getuser',(req,res)=>{
     let {userName} = req.body
-<<<<<<< HEAD
-    bookFind(userName)
-    .then((res)=>{
-        let {list} = res
-        res.send({code:0,msg:'查询成功',list})
-=======
-    // console.log({userName})
     bookFindUser(userName)
     .then((result)=>{
         // let {list} = result
@@ -38,7 +31,6 @@ router.post('/getuser',(req,res)=>{
     }).catch((err)=>{
         // console.log(2)
         res.send({code: -1, msg: '查询失败', err})
->>>>>>> ac7d8de4c07e31932b61c5810d10aad53b009fb7
     })
 })
 router.post('/getpho',(req,res)=>{
