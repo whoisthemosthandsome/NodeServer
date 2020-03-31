@@ -10,7 +10,7 @@ const picAdd = async (obj) => {
 
 // 查询所有客样照
 const picGet = async () => {
-  let result = await picModel.find()
+  let result = await picModel.find().populate('photer', 'phpName -_id')
   return result
 }
 
@@ -47,7 +47,7 @@ const picGetByKw = async (kw) => {
   return { list, count }
 }
 
-// 添加客样照
+// 修改客样照
 const picUpdate = async (_id, obj) => {
   let result = await picModel.updateOne({ _id }, obj)
   return result

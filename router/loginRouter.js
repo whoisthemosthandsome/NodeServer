@@ -59,14 +59,19 @@ router.post('/del', (req, res) => {
 router.post('/updata',(req,res) => {
     let {_id}= req.body
     let{userName,passWord,leavel} = req.body
+    // console.log(req)
+    // console.log({userName,passWord,leavel})
+    if(leavel==undefined){
+        leavel='admin'
+    }
     loginUpdata(_id,{userName,passWord,leavel})
     .then((result) => {
-        console.log(result)
+        // console.log(result)
         res.send({code: 0, msg: '修改成功'})
     })
     .catch((err) => {
         res.send({code: -1, msg: '修改失败', err})
-        console.log(err)
+        // console.log(err)
     })
 })
 module.exports = router

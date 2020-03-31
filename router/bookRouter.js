@@ -22,7 +22,7 @@ router.post('/get',(req,res)=>{
 })
 router.post('/getuser',(req,res)=>{
     let {userName} = req.body
-    bookFindUser(userName)
+    bookFind(userName)
     .then((result)=>{
         // let {list} = result
         // console.log(res)
@@ -48,6 +48,7 @@ router.post('/getpho',(req,res)=>{
     })
 })
 router.post('/del',(req,res)=>{
+    let {_id} = req.body
     bookDel(_id)
     .then(()=>{
         res.send({code: 0, msg: '删除成功'})
