@@ -1,4 +1,5 @@
-
+const path = require('path')
+const fs = require('fs')
 // -----------------用户数据库操作--------------------------
 const userModel = require('../db/model/userModel')
   //添加用户
@@ -30,7 +31,7 @@ const userModel = require('../db/model/userModel')
   // 分页查询用户
 const userPage = async (page, pageSize) => {
   let list = await userModel.find().sort({_id: -1}).skip((page - 1) * pageSize).limit(pageSize)
-  let count = await userModel.find()
+  let {count} = await userModel.find()
   count = count.length
   return { list, count }
 }

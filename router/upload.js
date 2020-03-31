@@ -10,7 +10,8 @@ const upload = multer({})
 //fields可以接受多个参数，多个key值的东西
 let multipleFields = upload.fields([
   {name:'pic'},
-  {name:'how'}
+  {name:'how'},
+  {name:'user'}
 ])
 
 router.post('/upload', (req, res) => {
