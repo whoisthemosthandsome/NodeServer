@@ -3,8 +3,8 @@ const router = express.Router()
 const {bookAdd,bookDel,bookFind,bookFindUser,bookFindPho} = require('../contrls/bookContrl')
 
 router.post('/add',(req,res)=>{
-    let {userName,phoName,date} = req.body
-    bookAdd({userName,phoName,date})
+    let {name,phoName,date} = req.body
+    bookAdd({name,phoName,date})
     .then(()=>{
         res.send({code:0,msg:'添加成功'})
     }).catch(()=>{
@@ -16,34 +16,24 @@ router.post('/get',(req,res)=>{
     .then((result)=>{
         res.send({code:0,msg:'查询成功',list:result})
     }).catch((err)=>{
-        // console.log(2)
         res.send({code: -1, msg: '查询失败', err})
     })
 })
 router.post('/getuser',(req,res)=>{
-    let {userName} = req.body
-    bookFind(userName)
+    let {name} = req.body
+    bookFind(name)
     .then((result)=>{
-        // let {list} = result
-        // console.log(res)
-        // console.log(1)
         res.send({code:0,msg:'查询成功',list:result})
     }).catch((err)=>{
-        // console.log(2)
         res.send({code: -1, msg: '查询失败', err})
     })
 })
 router.post('/getpho',(req,res)=>{
-    let {bookFindPho} = req.body
-    // console.log({userName})
-    bookFindUser(bookFindPho)
+    let {name} = req.body
+    bookFindUser(name)
     .then((result)=>{
-        // let {list} = result
-        // console.log(res)
-        // console.log(1)
         res.send({code:0,msg:'查询成功',list:result})
     }).catch((err)=>{
-        // console.log(2)
         res.send({code: -1, msg: '查询失败', err})
     })
 })
