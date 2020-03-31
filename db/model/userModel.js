@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     userName:{type:String},
     phoneNumber:{type:String},
     order:{type:String},
-    avatar:{type:String}
+    avatar:{type:String},
+    passWord:{type:String},
 })
 const userModel = mongoose.model('user', userSchema)
 module.exports = userModel
