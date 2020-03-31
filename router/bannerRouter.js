@@ -6,6 +6,18 @@ const upload = multer({})
 const path = require('path')
 const fs = require('fs')
 
+/**
+ * @api {post} /banner/add 添加轮播图
+ * @apiName add
+ * @apiGroup banner
+ *
+ * @apiParam {String} banner 图片
+ *
+ * @apiSuccess {Number} code 状态码
+ * @apiSuccess {String} msg  提示信息
+ * @apiSuccess {String} url  图片路径
+ * @apiSuccess {String} stack  错误信息
+ */
 // 添加轮播图
 router.post('/add', upload.single('banner'), (req, res) => {
   let { mimetype, buffer } = req.file
@@ -27,7 +39,16 @@ router.post('/add', upload.single('banner'), (req, res) => {
   })
 })
 
-// 获取轮播图
+/**
+ * @api {post} /banner/get 查询轮播图
+ * @apiName get
+ * @apiGroup banner
+ *
+ * @apiSuccess {Number} code 状态码
+ * @apiSuccess {String} msg  提示信息
+ * @apiSuccess {String} stack  错误信息
+ */
+// 查询轮播图
 router.post('/get', (req, res) => {
   bannerGet()
   .then((list) => {
@@ -38,6 +59,18 @@ router.post('/get', (req, res) => {
   })
 })
 
+/**
+ * @api {post} /banner/del 删除轮播图
+ * @apiName del
+ * @apiGroup banner
+ *
+ * @apiParam {String} _id 图片id
+ * @apiParam {String} url 图片路径
+ *
+ * @apiSuccess {Number} code 状态码
+ * @apiSuccess {String} msg  提示信息
+ * @apiSuccess {String} stack  错误信息
+ */
 // 删除轮播图
 router.post('/del', (req, res) => {
   let { _id, url } = req.body
