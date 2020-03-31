@@ -10,13 +10,13 @@ const picAdd = async (obj) => {
 
 // 查询所有客样照
 const picGet = async () => {
-  let result = await picModel.find().populate('photer', 'phpName -_id')
+  let result = await picModel.find().populate('photer', 'phpName phpRsident imgPath')
   return result
 }
 
 // 分页查询客样照
 const picGetByPage = async (page, pageSize) => {
-  let list = await picModel.find().sort({_id: -1}).skip((page - 1) * pageSize).limit(pageSize).populate('photer', 'phpName -_id')
+  let list = await picModel.find().sort({_id: -1}).skip((page - 1) * pageSize).limit(pageSize).populate('photer', 'phpName phpRsident imgPath')
   let count = await picModel.find()
   count = count.length
   return { list, count }
@@ -42,7 +42,7 @@ const picGetByKw = async (kw) => {
   let regex = new RegExp(kw)
   let list = await picModel.find({
     $or: [{title: { $regex: regex }}, { desc: { $regex: regex } }]
-  }).sort({_id: -1}).populate('photer', 'phpName -_id')
+  }).sort({_id: -1}).populate('photer', 'phpName phpRsident imgPath')
   let count = list.length // 总条数
   return { list, count }
 }
@@ -59,6 +59,17 @@ const picDel = async (_id) => {
   return result
 }
 
+// 点赞
+const picLike = async (_id, like) => {
+  let result = await picModel.updateOne({ _id }, { like })
+  return result
+}
+// 浏览
+const picLook = async (_id, look) => {
+  let result = await picModel.updateOne({ _id }, { look })
+  return result
+}
+
 module.exports = {
   picAdd,
   picGet,
@@ -67,5 +78,7 @@ module.exports = {
   picGetByPhpId,
   picGetByKw,
   picUpdate,
-  picDel
+  picDel,
+  picLike,
+  picLook
 }
