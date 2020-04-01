@@ -31,7 +31,7 @@ app.use('/how', howRouter)
 
 // 客样照路由
 const picRouter = require('./router/picRouter')
-app.use('/pic', picRouter)
+app.use('/pic', tokenMiddleware, picRouter)
 
 //用户路由
 const userRouter = require('./router/userRouter')
@@ -50,7 +50,7 @@ app.use('/order',orderRouter)
 
 // 上传图片
 const upload = require('./router/upload')
-app.use(upload)
+app.use(upload, tokenMiddleware)
 
 app.listen(3001, () => {
   console.log('server start')
