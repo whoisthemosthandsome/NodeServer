@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const path = require('path')
+const fs = require('fs')
 const {userAdd,userDel,userFind,userUpdata,userPage,userFindOne} = require('../contrls/userContrl')
 
 //添加用户信息
@@ -36,7 +38,8 @@ router.post('/getone', (req, res) => {
 // 删除用户信息
 router.post('/del', (req, res) => {
     let {_id} = req.body
-    userDel(_id)
+    fs.unlinkSync(path.join(__dirname, `..${_id.avatar}`))
+    userDel(_id._id)
     .then(() => {
     res.send({code: 0, msg: '删除成功'})
     })

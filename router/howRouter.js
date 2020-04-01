@@ -1,10 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { howAdd,howList,howDel,allList,ByPage,getScore} = require ('../contrls/howControl.js')
+const { howAdd,howList,howDel,allList,ByPage,getScore,byKw} = require ('../contrls/howControl.js')
 
 //用户添加自己的评论
 router.post('/add',(req,res)=>{
-  console.log('body',req.body)
   let {userName,content,url,star,staffName}=req.body
   let createTime=(new Date()).getTime()
 //  console.log('后端控制台8行',url)
@@ -24,7 +23,6 @@ router.post('/delete',(req,res)=>{
     res.send({code:0,msg:'删除评论成功'})
   })
   .catch((err)=>{
-    console.log(err)
     res.send({code: -1, msg: '删除失败',err:err})
   })
 })
@@ -55,7 +53,6 @@ router.post('/pages',(req,res)=>{
   let pageSize = req.body.pageSize ||2 //每页几条数据
   ByPage(page,pageSize)
   .then((data)=>{
-    console.log('后端58行',data)
      let {result,allCount}=data 
     res.send({err:0,msg:'查询成功',list:result,allCount})
   })
@@ -69,4 +66,17 @@ router.post('/score',(req,res)=>{
     res.send({err:0,msg:'查询平均分成功',score:data})
   })
 })
+//通过搜索关键字得到摄影师对应信息
+router.post('/byKw',(req,res)=>{
+  let kw = req.body.kw ||''
+  let page = req.body.page||1
+  let pageSize = req.body.pageSize||3
+  byKw(kw,page,pageSize)
+  .then((data)=>{
+    res.send({err:0,msg:'查询成功',list:data.result,allCount:data.allCount})
+  })
+  .catch((err)=>{res.send({err:-1,msg:'查询失败请重试',err:err})})
+})
+
+
 module.exports = router

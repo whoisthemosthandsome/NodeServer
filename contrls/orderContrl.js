@@ -6,7 +6,7 @@ const orderAdd = async (obj)=>{
 }
 
 const orderFind = async ()=>{
-    let result = await orderModel.find()
+    let result = await orderModel.find().populate('userName',"userName _id").populate('phoid',"phpName _id").populate('picid',"phpType imgs _id")
     return result
 }
 const orderFindOne = async (userName)=>{

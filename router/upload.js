@@ -10,9 +10,22 @@ const upload = multer({})
 //fields可以接受多个参数，多个key值的东西
 let multipleFields = upload.fields([
   {name:'pic'},
-  {name:'how'}
+  {name:'how'},
+  {name:'user'}
 ])
 
+/**
+ * @api {post} /upload 上传图片
+ * @apiName upload
+ * @apiGroup upload
+ *
+ * @apiParam {Object} key 自定义字段名(pic/how...)
+ *
+ * @apiSuccess {Number} code 状态码
+ * @apiSuccess {String} msg  提示信息
+ * @apiSuccess {Array} imgs  图片路径数组
+ * @apiSuccess {String} stack  错误信息
+ */
 router.post('/upload', (req, res) => {
   multipleFields(req,res,(err) => {
     if(err){return res.send({ code: 0, msg: '上传失败', stack: err})}
