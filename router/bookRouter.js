@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const token = require("../middlewear/token")
 const {bookAdd,bookDel,bookFind,bookFindUser,bookFindPho} = require('../contrls/bookContrl')
 
-router.post('/add',(req,res)=>{
+router.post('/add',token,(req,res)=>{
     let {name,phoName,date} = req.body
     bookAdd({name,phoName,date})
     .then(()=>{
@@ -11,7 +12,7 @@ router.post('/add',(req,res)=>{
         res.send({code: -1, msg: '添加失败',err})
     })
 })
-router.post('/get',(req,res)=>{
+router.post('/get',token,(req,res)=>{
     bookFind()
     .then((result)=>{
         res.send({code:0,msg:'查询成功',list:result})
@@ -19,7 +20,7 @@ router.post('/get',(req,res)=>{
         res.send({code: -1, msg: '查询失败', err})
     })
 })
-router.post('/getuser',(req,res)=>{
+router.post('/getuser',token,(req,res)=>{
     let {name} = req.body
     bookFind(name)
     .then((result)=>{
@@ -28,7 +29,7 @@ router.post('/getuser',(req,res)=>{
         res.send({code: -1, msg: '查询失败', err})
     })
 })
-router.post('/getpho',(req,res)=>{
+router.post('/getpho',token,(req,res)=>{
     let {name} = req.body
     bookFindUser(name)
     .then((result)=>{
@@ -37,7 +38,7 @@ router.post('/getpho',(req,res)=>{
         res.send({code: -1, msg: '查询失败', err})
     })
 })
-router.post('/del',(req,res)=>{
+router.post('/del',token,(req,res)=>{
     let {_id} = req.body
     bookDel(_id)
     .then(()=>{

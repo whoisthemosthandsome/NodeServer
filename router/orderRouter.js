@@ -1,8 +1,9 @@
 const express = require('express')
+const token = require("../middlewear/token")
 const router = express.Router()
 const {orderAdd,orderDel,orderFind,orderFindOne} = require('../contrls/orderContrl')
 
-router.post('/add',(req,res)=>{
+router.post('/add',token,(req,res)=>{
     let {userName,phoid,date,picid} = req.body
     orderAdd({userName,phoid,date,picid})
     .then(()=>{
@@ -12,7 +13,7 @@ router.post('/add',(req,res)=>{
         res.send({code: -1, msg: '添加失败',err})
     })
 })
-router.post('/del',(req,res)=>{
+router.post('/del',token,(req,res)=>{
     let {_id} = req.body
     orderDel(_id)
     .then(()=>{
@@ -22,7 +23,7 @@ router.post('/del',(req,res)=>{
         res.send({code: -1, msg: '删除失败', err})
     })
 })
-router.post('/get',(req,res)=>{
+router.post('/get',token,(req,res)=>{
     orderFind()
     .then((result)=>{
         res.send({code:0,msg:'查询成功',list:result})
@@ -30,7 +31,7 @@ router.post('/get',(req,res)=>{
         res.send({code: -1, msg: '查询失败', err})
     })
 })
-router.post('/getone',(req,res)=>{
+router.post('/getone',token,(req,res)=>{
     let {userName} = req.body
     orderFindOne(userName)
     .then((result)=>{

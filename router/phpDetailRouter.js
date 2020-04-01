@@ -12,7 +12,6 @@ router.post('/insertphp',(req,res)=>{
    phpDetailsModel.insertMany({imgPath,phpName,phpAtt,phpPosition,phpSelect,phpRsident,phpSatisfaction,phpTitle,phpSelf,phpRecom,venueImg,phpAuction,phpID}).then((data)=>{
        res.send({code:0,msg:'插入成功'})
    }).catch((data)=>{
-       console.log(data)
     res.send({code:-1,msg:'插入失败'})
    })
 })
@@ -47,7 +46,6 @@ router.get('/phpdel',(req,res)=>{
 // 更新
 router.post('/phpupdate',(req,res)=>{
     let {_id,updateList}=req.body
-    console.log(_id,updateList)
     phpDetailsModel.updateOne({_id},updateList).then(()=>{
         res.send({code:0,msg:'更新成功'})
     }).catch((err)=>{
