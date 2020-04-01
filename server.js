@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const cors = require('cors')
 const app = express()
+const tokenMiddleware = require('./middlewear/token')
 
 // 静态资源路径
 app.use('/public', express.static(path.join(__dirname, '/public')))
@@ -16,7 +17,7 @@ require('./db/connection')
 
 // 轮播图路由
 const bannerRouter = require('./router/bannerRouter')
-app.use('/banner', bannerRouter)
+app.use('/banner', tokenMiddleware, bannerRouter)
 
 // 摄影师路由
 const phpRouter=require('./router/phpRouter')
