@@ -37,7 +37,6 @@ router.post('/getphp',(req,res)=>{
 // 删除摄影师
 router.get('/phpdel',(req,res)=>{
     let {_id} =req.query
-    console.log(_id)
     phpModel.deleteOne({_id}).then((data)=>{
         res.send({code:0,msg:'删除成功'})
     }).catch((err)=>{
@@ -65,7 +64,6 @@ router.post('/phpfindone',(req,res)=>{
 // 根据摄影师ID查找一条摄影师数据
 router.post('/phpfindonebyid',(req,res)=>{
     let {ID}=req.body
-    console.log(ID)
     phpModel.findOne({phpID:ID}).then((data)=>{
         res.send({code:0,msg:"查询成功",data})
     }).catch((err)=>{
