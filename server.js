@@ -22,18 +22,15 @@ app.use('/banner', bannerRouter)
 const phpRouter=require('./router/phpRouter')
 // 摄影师详情页路由
 const phpDetailsRouter=require('./router/phpDetailRouter')
-app.use('/banner', bannerRouter)
 app.use('/php',phpRouter)
 app.use('/phpdetails',phpDetailsRouter)
 //评论区
- const howRouter = require('./router/howRouter')
- app.use('/how', howRouter)
+const howRouter = require('./router/howRouter')
+app.use('/how', howRouter)
 
 // 客样照路由
 const picRouter = require('./router/picRouter')
-const uploadPic = require('./router/uploadPic')
 app.use('/pic', picRouter)
-app.use('/pic', uploadPic)
 
 //用户路由
 const userRouter = require('./router/userRouter')
