@@ -3,7 +3,7 @@ const {secret} = require("../config/config")
 module.exports=async function(req,res,next){
 //   console.log(req.headers.authorization)
   let token = req.headers.authorization.split("Bearer ")[1]
-//   console.log(token)
+  // console.log(token)
 //   console.log(req)
   try {
     let {userInfo} = jsonWebToken.verify(token,secret)

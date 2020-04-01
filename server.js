@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const cors = require('cors')
 const app = express()
-const tokenMiddleware = require('./middlewear/token')
 
 // 静态资源路径
 app.use('/public', express.static(path.join(__dirname, '/public')))
@@ -17,7 +16,7 @@ require('./db/connection')
 
 // 轮播图路由
 const bannerRouter = require('./router/bannerRouter')
-app.use('/banner', tokenMiddleware, bannerRouter)
+app.use('/banner', bannerRouter)
 
 // 摄影师路由
 const phpRouter=require('./router/phpRouter')
@@ -31,7 +30,7 @@ app.use('/how', howRouter)
 
 // 客样照路由
 const picRouter = require('./router/picRouter')
-app.use('/pic', tokenMiddleware, picRouter)
+app.use('/pic', picRouter)
 
 //用户路由
 const userRouter = require('./router/userRouter')
@@ -50,7 +49,7 @@ app.use('/order',orderRouter)
 
 // 上传图片
 const upload = require('./router/upload')
-app.use(upload, tokenMiddleware)
+app.use(upload)
 
 app.listen(3001, () => {
   console.log('server start')
