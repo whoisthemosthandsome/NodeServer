@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const token = require("../middlewear/token")
 const path = require('path')
 const fs = require('fs')
 const {userAdd,userDel,userFind,userUpdata,userPage,userFindOne} = require('../contrls/userContrl')
 
 //添加用户信息
-router.post('/add',(req,res) =>{
+router.post('/add',token,(req,res) =>{
     let {userName,phoneNumber,avatar,order,passWord} = req.body
     userAdd({userName,phoneNumber,avatar,order,passWord})
     .then(()=>{
@@ -15,7 +16,7 @@ router.post('/add',(req,res) =>{
     })
 })
 // 查询所有用户信息
-router.post('/get', (req, res) => {
+router.post('/get', token,(req, res) => {
     userFind()
     .then((list) => {
         res.send({code: 0, msg: '查询成功', list})
@@ -25,7 +26,7 @@ router.post('/get', (req, res) => {
     })
 })
 //查询单独用户
-router.post('/getone', (req, res) => {
+router.post('/getone',token, (req, res) => {
     let {_id} = req.body
     userFind(_id)
     .then((list) => {
@@ -36,7 +37,7 @@ router.post('/getone', (req, res) => {
     })
 })
 // 删除用户信息
-router.post('/del', (req, res) => {
+router.post('/del',token, (req, res) => {
     let {_id} = req.body
     fs.unlinkSync(path.join(__dirname, `..${_id.avatar}`))
     userDel(_id._id)
@@ -48,7 +49,7 @@ router.post('/del', (req, res) => {
     })
 })
     // 分页查询用户
-router.post('/page', (req, res) => {
+router.post('/page',token, (req, res) => {
     let { page, pageSize } = req.body
     userPage(Number(page), Number(pageSize))
     .then(({list, count}) => {
@@ -59,7 +60,7 @@ router.post('/page', (req, res) => {
     })
     })
 //修改用户信息
-router.post('/updata',(req,res) => {
+router.post('/updata',token,(req,res) => {
     let {_id} = req.body
     let {userName,passWord,order,avatar,phoneNumber} = req.body
     // console.log({userName,passWord,order,avatar,phoneNumber})

@@ -11,9 +11,10 @@ const loginModel = require('../db/model/loginModel')
     let result = await loginModel.find()
     return result
   }
-  //查看一个管理员
+  //查看一个管理员 登录
   const loginFindOne = async ({userName,passWord})=>{
     let result = await loginModel.find({userName,passWord})
+    // Console.log(result)
     return result
   }
   //删除管理员
@@ -28,7 +29,7 @@ const loginModel = require('../db/model/loginModel')
   //修改管理员信息
   const loginUpdata = async (_id,obj) =>{
     let result = await loginModel.updateOne({_id},obj)
-    console.log(result)
+    // console.log(result)
     return result
   }
 module.exports = {loginAdd,loginUpdata,loginFind,loginDel,loginFindOne,loginup}
