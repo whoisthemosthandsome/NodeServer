@@ -12,9 +12,11 @@ const loginModel = require('../db/model/loginModel')
     return result
   }
   //查看一个管理员 登录
-  const loginFindOne = async ({userName,passWord})=>{
-    let result = await loginModel.find({userName,passWord})
-    // Console.log(result)
+  const loginFindOne = async (obj)=>{
+    let { userName } = obj
+    // console.log(obj)
+    let result = await loginModel.find({userName})
+    // console.log(result)
     return result
   }
   //删除管理员

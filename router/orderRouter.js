@@ -18,7 +18,7 @@ const {orderAdd,orderDel,orderFind,orderFindOne} = require('../contrls/orderCont
  * @apiSuccess {String} msg  提示信息
  * @apiSuccess {String} err  错误原因
  */
-router.post('/add',(req,res)=>{
+router.post('/add',token,(req,res)=>{
     let {userName,phoid,date,picid} = req.body
     orderAdd({userName,phoid,date,picid})
     .then(()=>{
@@ -40,7 +40,7 @@ router.post('/add',(req,res)=>{
  * @apiSuccess {String} msg  提示信息
  * @apiSuccess {String} err  错误原因
  */
-router.post('/del',(req,res)=>{
+router.post('/del',token,(req,res)=>{
     let {_id} = req.body
     orderDel(_id)
     .then(()=>{
@@ -62,7 +62,7 @@ router.post('/del',(req,res)=>{
  * @apiSuccess {String} err  错误原因
  * @apiSuccess {String} list  订单查询列表
  */
-router.post('/get',(req,res)=>{
+router.post('/get',token,(req,res)=>{
     orderFind()
     .then((result)=>{
         res.send({code:0,msg:'查询成功',list:result})
@@ -84,7 +84,7 @@ router.post('/get',(req,res)=>{
  * 
  */
 
-router.post('/getone',(req,res)=>{
+router.post('/getone',token,(req,res)=>{
     let {userName} = req.body
     orderFindOne(userName)
     .then((result)=>{

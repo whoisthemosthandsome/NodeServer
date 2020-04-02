@@ -19,7 +19,7 @@ const {loginAdd,loginDel,loginFind,loginUpdata,loginFindOne,loginup} = require('
  * @apiSuccess {String} msg  提示信息
  */
 //添加管理员信息
-router.post('/add',(req,res) =>{
+router.post('/add',token,(req,res) =>{
     let {userName,passWord,leavel} = req.body
     loginAdd({userName,passWord,leavel})
     .then(()=>{
@@ -41,7 +41,7 @@ router.post('/add',(req,res) =>{
  * @apiSuccess {String} list  查询到的管理员列表
  */
 // 查询所有管理员信息
-router.post('/get',(req, res) => {
+router.post('/get',token,(req, res) => {
     loginFind()
     .then((list) => {
         res.send({code: 0, msg: '查询成功', list})
@@ -68,16 +68,27 @@ router.post('/get',(req, res) => {
     // 查询单个管理员信息 登录
 router.post('/getone', (req, res) => {
     let {userName,passWord} = req.body
+    // console.log(req)
+    // console.log({userName,passWord},req.body)
     loginFindOne({userName,passWord})
-    .then(() => {
-        let token = jsonWebToken.sign({userName,passWord},secret)
-        // console.log(token)
-        let userInfo= jsonWebToken.verify(token,secret)
-        // console.log(userInfo)
-        res.send({code: 0, msg: '登录成功',token})
+    .then((list) => {
+        // console.log(passWord)
+        // console.log(list)
+        if(list == []){res.send({code: -1, msg: '账号错误'})}
+        else if(list[0].passWord == passWord){
+            let token = jsonWebToken.sign({userName,passWord},secret)
+            // console.log(token)
+            let userInfo= jsonWebToken.verify(token,secret)
+            // console.log(userInfo)
+            res.send({code: 0, msg: '登录成功',token})
+        }
+        else{
+        res.send({code: -1, msg: '密码错误'})
+        }
     })
     .catch((err) => {
         res.send({code: -1, msg: '登录失败', err})
+        console.log(err)
     })
 })
 
@@ -93,7 +104,7 @@ router.post('/getone', (req, res) => {
  * @apiSuccess {String} err  错误原因
  * @apiSuccess {String} list  查询的管理员信息
  */
-router.post('/getup', (req, res) => {
+router.post('/getup',token, (req, res) => {
     let {_id} = req.body
     loginup(_id)
     .then((result) => {
@@ -115,7 +126,7 @@ router.post('/getup', (req, res) => {
  * @apiSuccess {String} err  错误原因
  */
     // 删除管理员信息
-router.post('/del',(req, res) => {
+router.post('/del',token,(req, res) => {
     let {_id} = req.body
     loginDel(_id)
     .then(() => {
@@ -141,7 +152,7 @@ router.post('/del',(req, res) => {
  * @apiSuccess {String} err  错误原因
  */
     //修改用户信息
-router.post('/updata',(req,res) => {
+router.post('/updata',token,(req,res) => {
     let {_id}= req.body
     let{userName,passWord,leavel} = req.body
     // console.log(req)
