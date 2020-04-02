@@ -41,13 +41,14 @@ router.post('/add', (req, res) => {
  * @apiSuccess {Number} code 状态码
  * @apiSuccess {String} msg  提示信息
  * @apiSuccess {Array} list  客样照数据
+ * @apiSuccess {Number} count 总条数
  * @apiSuccess {String} stack  错误信息
  */
 // 查询所有客样照
 router.post('/get', (req, res) => {
   picGet()
-  .then((list) => {
-    res.send({code: 0, msg: '查询成功', list})
+  .then(({list, count}) => {
+    res.send({code: 0, msg: '查询成功', list, count})
   })
   .catch((stack) => {
     res.send({code: -1, msg: '查询失败', stack})

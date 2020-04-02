@@ -10,8 +10,9 @@ const picAdd = async (obj) => {
 
 // 查询所有客样照
 const picGet = async () => {
-  let result = await picModel.find().populate('photer', 'phpName phpRsident imgPath')
-  return result
+  let list = await picModel.find().sort({_id: -1}).populate('photer', 'phpName phpRsident imgPath')
+  count = list.length
+  return {list, count}
 }
 
 // 分页查询客样照
