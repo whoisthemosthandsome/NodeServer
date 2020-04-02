@@ -23,7 +23,7 @@ router.post('/add',token,(req,res)=>{
     bookAdd({name,phoName,date})
     .then(()=>{
         res.send({code:0,msg:'添加成功'})
-    }).catch(()=>{
+    }).catch((err)=>{
         res.send({code: -1, msg: '添加失败',err})
     })
 })
