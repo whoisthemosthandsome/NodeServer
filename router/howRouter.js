@@ -17,9 +17,7 @@ router.post('/add',(req,res)=>{
   })
 })
 
-<<<<<<< HEAD
 
-=======
 /**
  * @api {post} /how/delete 用户删除自己发布的评论 
  * @apiName 用户删除自己发布的评论
@@ -31,7 +29,6 @@ router.post('/add',(req,res)=>{
  * @apiSuccess {String} msg  提示信息
  * @apiSuccess {String} err  错误信息
  */
->>>>>>> 8bdb363ffc42aee50d1a33017601d789841768d4
 //用户删除自己发布的评论
 router.post('/delete',(req,res)=>{
   let {_id}=req.body

@@ -41,7 +41,7 @@ router.post('/add',(req,res) =>{
  * @apiSuccess {String} list  查询到的管理员列表
  */
 // 查询所有管理员信息
-router.post('/get', token,(req, res) => {
+router.post('/get',(req, res) => {
     loginFind()
     .then((list) => {
         res.send({code: 0, msg: '查询成功', list})
@@ -66,7 +66,7 @@ router.post('/get', token,(req, res) => {
  * @apiSuccess {String} token  token信息
  */
     // 查询单个管理员信息 登录
-router.post('/getone',token, (req, res) => {
+router.post('/getone', (req, res) => {
     let {userName,passWord} = req.body
     loginFindOne({userName,passWord})
     .then(() => {
@@ -93,7 +93,7 @@ router.post('/getone',token, (req, res) => {
  * @apiSuccess {String} err  错误原因
  * @apiSuccess {String} list  查询的管理员信息
  */
-router.post('/getup',token, (req, res) => {
+router.post('/getup', (req, res) => {
     let {_id} = req.body
     loginup(_id)
     .then((result) => {
@@ -115,7 +115,7 @@ router.post('/getup',token, (req, res) => {
  * @apiSuccess {String} err  错误原因
  */
     // 删除管理员信息
-router.post('/del', token,(req, res) => {
+router.post('/del',(req, res) => {
     let {_id} = req.body
     loginDel(_id)
     .then(() => {
@@ -141,7 +141,7 @@ router.post('/del', token,(req, res) => {
  * @apiSuccess {String} err  错误原因
  */
     //修改用户信息
-router.post('/updata',token,(req,res) => {
+router.post('/updata',(req,res) => {
     let {_id}= req.body
     let{userName,passWord,leavel} = req.body
     // console.log(req)

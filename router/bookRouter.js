@@ -18,7 +18,7 @@ const {bookAdd,bookDel,bookFind,bookFindUser,bookFindPho} = require('../contrls/
  * @apiSuccess {String} err  错误原因
  * @apiSuccess {String} msg  提示信息
  */
-router.post('/add',token,(req,res)=>{
+router.post('/add',(req,res)=>{
     let {name,phoName,date} = req.body
     bookAdd({name,phoName,date})
     .then(()=>{
@@ -39,7 +39,7 @@ router.post('/add',token,(req,res)=>{
  * @apiSuccess {String} err  错误原因
  * 
  */
-router.post('/get',token,(req,res)=>{
+router.post('/get',(req,res)=>{
     bookFind()
     .then((result)=>{
         res.send({code:0,msg:'查询成功',list:result})
@@ -60,7 +60,7 @@ router.post('/get',token,(req,res)=>{
  * @apiSuccess {String} err  错误原因
  * 
  */
-router.post('/getuser',token,(req,res)=>{
+router.post('/getuser',(req,res)=>{
     let {name} = req.body
     bookFind(name)
     .then((result)=>{
@@ -82,7 +82,7 @@ router.post('/getuser',token,(req,res)=>{
  * @apiSuccess {String} err  错误原因
  * 
  */
-router.post('/getpho',token,(req,res)=>{
+router.post('/getpho',(req,res)=>{
     let {name} = req.body
     bookFindUser(name)
     .then((result)=>{
@@ -103,7 +103,7 @@ router.post('/getpho',token,(req,res)=>{
  * @apiSuccess {String} err  错误原因
  * 
  */
-router.post('/del',token,(req,res)=>{
+router.post('/del',(req,res)=>{
     let {_id} = req.body
     bookDel(_id)
     .then(()=>{
