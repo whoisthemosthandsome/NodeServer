@@ -6,11 +6,11 @@ module.exports=async function(req,res,next){
   // console.log(token)
 //   console.log(req)
   try {
-    let {userInfo} = jsonWebToken.verify(token,secret)
-    req.userInfo = userInfo
+    // let {userInfo} = jsonWebToken.verify(token,secret)
+    // req.userInfo = userInfo
   } catch (err) {
     // console.log(error)
-    return res.send({code:402,msg:'token失效了'})
+    // return res.send({code:402,msg:'token失效了'})
   }
   await next()
 
